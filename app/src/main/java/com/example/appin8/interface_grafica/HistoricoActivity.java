@@ -3,8 +3,12 @@ package com.example.appin8.interface_grafica;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.appin8.R;
@@ -24,6 +28,7 @@ import java.io.InputStreamReader;
 public class HistoricoActivity extends AppCompatActivity {
 
     ListView lv_historico;
+    ImageView bt_voltar_menu;
     JSONArray jsonArrayHistorico;
 
     @Override
@@ -32,6 +37,8 @@ public class HistoricoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_historico);
 
         lv_historico = findViewById(R.id.lv_historico);
+        bt_voltar_menu = findViewById(R.id.bt_voltar_menu);
+        bt_voltar_menu.setVisibility(View.VISIBLE);
 
         String resposta = readFromFile(getApplicationContext());
 
@@ -84,5 +91,11 @@ public class HistoricoActivity extends AppCompatActivity {
         }
 
         return ret;
+    }
+
+    // Volta para a MenuActivity
+    public void voltaMenu(View view){
+        bt_voltar_menu.setVisibility(View.GONE);
+        finish();
     }
 }

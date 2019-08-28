@@ -1,5 +1,6 @@
 <androidx.appcompat.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@color/colorAccent">
@@ -9,16 +10,29 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="@dimen/Margem20dp">
+        android:layout_marginRight="@dimen/Margem20dp"
+        tools:ignore="RtlHardcoded">
 
-    <ImageView
-        android:layout_width="?actionBarSize"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/Margem4dp"
-        android:src="@drawable/logo_coin"
-        android:tint="@android:color/white"
-        android:layout_centerInParent="true"
-        android:padding="@dimen/Margem2dp" />
+        <ImageView
+            android:id="@+id/bt_voltar_menu"
+            android:layout_width="@dimen/Margem32dp"
+            android:layout_height="@dimen/Margem45dp"
+            android:layout_centerVertical="true"
+            android:tint="@android:color/white"
+            android:src="@drawable/arrow_back"
+            android:onClick="voltaMenu"
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:layout_width="?actionBarSize"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/Margem4dp"
+            android:src="@drawable/logo_coin"
+            android:tint="@android:color/white"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/Margem2dp"
+            tools:ignore="ContentDescription" />
 
     </RelativeLayout>
 
