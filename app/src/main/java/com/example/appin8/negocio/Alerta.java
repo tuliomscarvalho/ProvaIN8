@@ -18,7 +18,7 @@ public class Alerta {
                     .setMessage(R.string.texto_valor_valido)
                     .setCancelable(false)
                     .setIcon(R.drawable.logo_coin)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.texto_ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.dismiss();
                         }
@@ -36,9 +36,10 @@ public class Alerta {
                     .setMessage(R.string.texto_sem_internet)
                     .setCancelable(false)
                     .setIcon(R.drawable.logo_coin)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.texto_ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.dismiss();
+                            ((Activity) context).finish();
                         }
                     });
             AlertDialog alert = builder.create();
@@ -54,7 +55,7 @@ public class Alerta {
                     .setMessage(R.string.texto_nenhum_historico)
                     .setCancelable(false)
                     .setIcon(R.drawable.logo_coin)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.texto_ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.dismiss();
                             ((Activity) context).finish();

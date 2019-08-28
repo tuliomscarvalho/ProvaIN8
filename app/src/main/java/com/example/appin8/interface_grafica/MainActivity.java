@@ -233,12 +233,13 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void verificaBusca(){
-        if(coinRates.getCoins().getUSD() == 1.0 || coinRates.getCoins().getBRL() == 1.0 ||
-                coinRates.getCoins().getEUR() == 1.0){
+        if(!baseDesejada.getSelectedItem().toString().equals("USD") && coinRates.getCoins().getUSD() == 1.0 ||
+                !baseDesejada.getSelectedItem().toString().equals("EUR") && coinRates.getCoins().getEUR() == 1.0 ||
+                !baseDesejada.getSelectedItem().toString().equals("BRL") && coinRates.getCoins().getBRL() == 1.0){
             valormoeda1.setText("-");
             valorMoeda2.setText("-");
+            Alerta.alertaSemInternet(this);
         }
-        Alerta.alertaSemInternet(getApplicationContext());
     }
 
     // Converte moeda
