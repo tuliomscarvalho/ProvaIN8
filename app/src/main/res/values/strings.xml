@@ -19,6 +19,10 @@
     <string name="texto_eur">EUR</string>
     <string name="texto_usd">USD</string>
     <string name="texto_selecione_base">Selecione sua moeda base:</string>
+    <string name="texto_sem_internet">Por favor, conecte-se a internet para utilizar a aplicação!</string>
+    <string name="texto_atencao">Atenção</string>
+    <string name="texto_valor_valido">Por favor, insira um valor válido!</string>
+    <string name="texto_nenhum_historico">Nenhum histórico encontrado!</string>
 
     <!--Toast exibido ao pressionar o botão 'back' do smartphone-->
     <string name="texto_pressione_novamente">Pressione mais uma vez para sair!</string>

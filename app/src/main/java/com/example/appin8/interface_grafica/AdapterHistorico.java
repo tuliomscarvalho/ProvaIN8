@@ -66,29 +66,29 @@ public class AdapterHistorico extends BaseAdapter {
 
         JSONObject jsonaux = (JSONObject) historico.get(i);
 
-        ((TextView) itemPlano.findViewById(R.id.tv_data_historico)).setText(String.valueOf(jsonaux.get("DataHistorico")));
-        ((TextView) itemPlano.findViewById(R.id.tv_moeda_base)).setText(String.valueOf(jsonaux.get("MoedaBase")));
+        ((TextView) itemPlano.findViewById(R.id.tv_data_historico)).setText(String.valueOf(jsonaux.get("dataHistorico")));
+        ((TextView) itemPlano.findViewById(R.id.tv_moeda_base)).setText(String.valueOf(jsonaux.get("moedaBase")));
 
         String valorBase = "";
-        if(String.valueOf(jsonaux.get("MoedaBase")).equals("BRL")){
-            valorBase = "R$ "+ String.format("%.2f",jsonaux.get("ValorBase"));
-        }else if(String.valueOf(jsonaux.get("MoedaBase")).equals("USD")){
-            valorBase = "$ "+ String.format("%.2f",jsonaux.get("ValorBase"));
+        if(String.valueOf(jsonaux.get("moedaBase")).equals("BRL")){
+            valorBase = "R$ "+ String.format("%.2f",jsonaux.get("valorBase"));
+        }else if(String.valueOf(jsonaux.get("moedaBase")).equals("USD")){
+            valorBase = "$ "+ String.format("%.2f",jsonaux.get("valorBase"));
         }else{
-            valorBase = "€ "+ String.format("%.2f",jsonaux.get("ValorBase"));
+            valorBase = "€ "+ String.format("%.2f",jsonaux.get("valorBase"));
         }
         ((TextView) itemPlano.findViewById(R.id.tv_valor_base)).setText(valorBase);
 
 
-        ((TextView) itemPlano.findViewById(R.id.tv_moeda_destino)).setText(String.valueOf(jsonaux.get("MoedaDestino")));
+        ((TextView) itemPlano.findViewById(R.id.tv_moeda_destino)).setText(String.valueOf(jsonaux.get("moedaDestino")));
 
         String valorDestino = "";
-        if(String.valueOf(jsonaux.get("MoedaDestino")).equals("BRL")){
-            valorDestino = "R$ "+ String.format("%.2f",jsonaux.get("ValorDestino"));
-        }else if(String.valueOf(jsonaux.get("MoedaDestino")).equals("USD")){
-            valorDestino = "$ "+ String.format("%.2f",jsonaux.get("ValorDestino"));
+        if(String.valueOf(jsonaux.get("moedaDestino")).equals("BRL")){
+            valorDestino = "R$ "+ String.format("%.2f",jsonaux.get("valorDestino"));
+        }else if(String.valueOf(jsonaux.get("moedaDestino")).equals("USD")){
+            valorDestino = "$ "+ String.format("%.2f",jsonaux.get("valorDestino"));
         }else{
-            valorDestino = "€ "+ String.format("%.2f",jsonaux.get("ValorDestino"));
+            valorDestino = "€ "+ String.format("%.2f",jsonaux.get("valorDestino"));
         }
         ((TextView) itemPlano.findViewById(R.id.tv_valor_destino)).setText(valorDestino);
 

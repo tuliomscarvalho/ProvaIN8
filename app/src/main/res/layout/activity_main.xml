@@ -201,7 +201,8 @@
                         android:textColorHint="@color/corFundo"
                         android:textSize="@dimen/dimen20sp"
                         android:textAlignment="center"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@android:color/black"
+                        tools:ignore="Autofill" />
 
                     <TextView
                         android:id="@+id/tv_texto_resultado"

@@ -21,7 +21,8 @@ import com.example.appin8.conexao.JsonPlaceHolder;
 import com.example.appin8.R;
 import com.example.appin8.negocio.Alerta;
 import com.example.appin8.negocio.CoinRates;
-import com.example.appin8.negocio.Coins;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -46,7 +47,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity{
 
     CoinRates coinRates = new CoinRates();
-    Coins coins = new Coins();
     private TextView nomeMoeda1, nomeMoeda2, valormoeda1, valorMoeda2, resultado;
     public EditText valorDesejado;
     private Button buttonconverte;
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity{
     private static final String BASE_URL = "https://api.exchangeratesapi.io/";
     private Call<CoinRates> coinRatesCall;
     private JsonPlaceHolder jsonPlaceHolder;
-    private String appdata = "{}";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity{
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 valorDesejado.setText("");
                 resultado.setText("");
-                String[] moedasSelecionaveis = null;
+                String[] moedasSelecionaveis = new String[0];
                 switch (position) {
                     case 0:
                         moedasSelecionaveis = new String[]{"USD", "EUR"};
@@ -129,22 +129,7 @@ public class MainActivity extends AppCompatActivity{
                         coinRates = response.body();
                         writeToAppFile(coinRates, getApplicationContext());
 
-                        if(baseDesejada.getSelectedItem().equals("BRL")){
-                            nomeMoeda1.setText("USD");
-                            valormoeda1.setText("R$ " + String.format("%.4f",1/coinRates.getCoins().getUSD()));
-                            nomeMoeda2.setText("EUR");
-                            valorMoeda2.setText("R$ " + String.format("%.4f",1/coinRates.getCoins().getEUR()));
-                        }else if(baseDesejada.getSelectedItem().equals("USD")){
-                            nomeMoeda1.setText("BRL");
-                            valormoeda1.setText("$ "+ String.format("%.4f",1/coinRates.getCoins().getBRL()));
-                            nomeMoeda2.setText("EUR");
-                            valorMoeda2.setText("$ " + String.format("%.4f",1/coinRates.getCoins().getEUR()));
-                        }else{
-                            nomeMoeda1.setText("BRL");
-                            valormoeda1.setText("€ "+ String.format("%.4f",1/coinRates.getCoins().getBRL()));
-                            nomeMoeda2.setText("USD");
-                            valorMoeda2.setText("€ " + String.format("%.4f",1/coinRates.getCoins().getUSD()));
-                        }
+                        preencheCamposMenu();
 
                     }
                     @SuppressLint("SetTextI18n")
@@ -153,51 +138,11 @@ public class MainActivity extends AppCompatActivity{
                         Log.v("Code2: ", "Error: " + t.getMessage());
                         baseDesejada.setEnabled(false);
                         baseDesejada.setClickable(false);
-                        appdata = readFromAppFile(getApplicationContext());
-                        if(!appdata.isEmpty()){
-                            JSONParser jsonParser = new JSONParser();
-                            JSONObject jsonObject;
-                            JSONObject jsonObject1;
-                            String rates;
-                            try {
-                                jsonObject = (JSONObject) jsonParser.parse(appdata);
-                                coinRates.setBase(String.valueOf(jsonObject.get("base")));
-                                coinRates.setDate(String.valueOf(jsonObject.get("date")));
-                                rates = String.valueOf(jsonObject.get("rates"));
-                                jsonObject1 = (JSONObject) jsonParser.parse(rates);
-                                if(jsonObject1 != null){
-                                    coins.setUSD(Double.valueOf(String.valueOf(jsonObject1.get("USD"))));
-                                    coins.setBRL(Double.valueOf(String.valueOf(jsonObject1.get("BRL"))));
-                                    coins.setEUR(Double.valueOf(String.valueOf(jsonObject1.get("EUR"))));
-                                    coinRates.setCoins(coins);
+                        readFromAppFile(getApplicationContext());
 
-                                    if(baseDesejada.getSelectedItem().equals("BRL")){
-                                        nomeMoeda1.setText("USD");
-                                        valormoeda1.setText("R$ " + String.format("%.4f",1/coinRates.getCoins().getUSD()));
-                                        nomeMoeda2.setText("EUR");
-                                        valorMoeda2.setText("R$ " + String.format("%.4f",1/coinRates.getCoins().getEUR()));
-                                    }else if(baseDesejada.getSelectedItem().equals("USD")){
-                                        nomeMoeda1.setText("BRL");
-                                        valormoeda1.setText("$ "+ String.format("%.4f",1/coinRates.getCoins().getBRL()));
-                                        nomeMoeda2.setText("EUR");
-                                        valorMoeda2.setText("$ " + String.format("%.4f",1/coinRates.getCoins().getEUR()));
-                                    }else{
-                                        nomeMoeda1.setText("BRL");
-                                        valormoeda1.setText("€ "+ String.format("%.4f",1/coinRates.getCoins().getBRL()));
-                                        nomeMoeda2.setText("USD");
-                                        valorMoeda2.setText("€ " + String.format("%.4f",1/coinRates.getCoins().getUSD()));
-                                    }
-                                }else{
-                                    valormoeda1.setText(" - ");
-                                    valorMoeda2.setText(" - ");
-                                    valorDesejado.setClickable(false);
-                                    valorDesejado.setEnabled(false);
-                                    buttonconverte.setClickable(false);
-                                    buttonconverte.setEnabled(false);
-                                }
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
+                        if(coinRates.getBase() != null){
+
+                            preencheCamposMenu();
 
                         }else{
                             valormoeda1.setText(" - ");
@@ -246,45 +191,11 @@ public class MainActivity extends AppCompatActivity{
                 Log.v("Code4: ", "Error: " + t.getMessage());
                 baseDesejada.setEnabled(false);
                 baseDesejada.setClickable(false);
-                appdata = readFromAppFile(getApplicationContext());
-                if(!appdata.isEmpty()){
-                    JSONParser jsonParser = new JSONParser();
-                    JSONObject jsonObject;
-                    JSONObject jsonObject1;
-                    String rates;
-                    try {
-                        jsonObject = (JSONObject) jsonParser.parse(appdata);
-                        coinRates.setBase(String.valueOf(jsonObject.get("base")));
-                        coinRates.setDate(String.valueOf(jsonObject.get("date")));
-                        rates = String.valueOf(jsonObject.get("rates"));
-                        jsonObject1 = (JSONObject) jsonParser.parse(rates);
-                        if(jsonObject1 != null){
-                            coins.setUSD(Double.valueOf(String.valueOf(jsonObject1.get("USD"))));
-                            coins.setBRL(Double.valueOf(String.valueOf(jsonObject1.get("BRL"))));
-                            coins.setEUR(Double.valueOf(String.valueOf(jsonObject1.get("EUR"))));
-                            coinRates.setCoins(coins);
+                readFromAppFile(getApplicationContext());
 
-                            if(baseDesejada.getSelectedItem().equals("BRL")){
-                                nomeMoeda1.setText("USD");
-                                valormoeda1.setText("R$ " + String.format("%.4f",1/coinRates.getCoins().getUSD()));
-                                nomeMoeda2.setText("EUR");
-                                valorMoeda2.setText("R$ " + String.format("%.4f",1/coinRates.getCoins().getEUR()));
-                            }else if(baseDesejada.getSelectedItem().equals("USD")){
-                                nomeMoeda1.setText("BRL");
-                                valormoeda1.setText("$ "+ String.format("%.4f",1/coinRates.getCoins().getBRL()));
-                                nomeMoeda2.setText("EUR");
-                                valorMoeda2.setText("$ " + String.format("%.4f",1/coinRates.getCoins().getEUR()));
-                            }else{
-                                nomeMoeda1.setText("BRL");
-                                valormoeda1.setText("€ "+ String.format("%.4f",1/coinRates.getCoins().getBRL()));
-                                nomeMoeda2.setText("USD");
-                                valorMoeda2.setText("€ " + String.format("%.4f",1/coinRates.getCoins().getUSD()));
-                            }
-                        }
+                if(coinRates.getBase() != null){
 
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    preencheCamposMenu();
 
                 }else{
                     valormoeda1.setText(" - ");
@@ -293,21 +204,53 @@ public class MainActivity extends AppCompatActivity{
                     valorDesejado.setEnabled(false);
                     buttonconverte.setClickable(false);
                     buttonconverte.setEnabled(false);
-                    resultado.setClickable(false);
-                    resultado.setEnabled(false);
                 }
 
             }
         });
     }
 
+    public void preencheCamposMenu(){
+        if(baseDesejada.getSelectedItem().equals("BRL")){
+            verificaBusca();
+            nomeMoeda1.setText("USD");
+            valormoeda1.setText("R$ " + String.format("%.4f",1/coinRates.getCoins().getUSD()));
+            nomeMoeda2.setText("EUR");
+            valorMoeda2.setText("R$ " + String.format("%.4f",1/coinRates.getCoins().getEUR()));
+        }else if(baseDesejada.getSelectedItem().equals("USD")){
+            verificaBusca();
+            nomeMoeda1.setText("BRL");
+            valormoeda1.setText("$ "+ String.format("%.4f",1/coinRates.getCoins().getBRL()));
+            nomeMoeda2.setText("EUR");
+            valorMoeda2.setText("$ " + String.format("%.4f",1/coinRates.getCoins().getEUR()));
+        }else {
+            verificaBusca();
+            nomeMoeda1.setText("BRL");
+            valormoeda1.setText("€ "+ String.format("%.4f",1/coinRates.getCoins().getBRL()));
+            nomeMoeda2.setText("USD");
+            valorMoeda2.setText("€ " + String.format("%.4f",1/coinRates.getCoins().getUSD()));
+        }
+    }
+
+    public void verificaBusca(){
+        if(coinRates.getCoins().getUSD() == 1.0 || coinRates.getCoins().getBRL() == 1.0 ||
+                coinRates.getCoins().getEUR() == 1.0){
+            valormoeda1.setText("-");
+            valorMoeda2.setText("-");
+        }
+        Alerta.alertaSemInternet(getApplicationContext());
+    }
+
     // Converte moeda
     public void coverteMoeda(View view){
+
         String simboloMoeda = null;
         String base = baseDesejada.getSelectedItem().toString();
         String moeda = moedaDesejada.getSelectedItem().toString();
         if(valorDesejado.getText().toString().equals(".") || valorDesejado.getText().toString().isEmpty()){
             valorDesejado.setText("");
+            valormoeda1.setText("-");
+            valorMoeda2.setText("-");
             Alerta.retornaErroConversao(this);
             return;
         }
@@ -349,9 +292,10 @@ public class MainActivity extends AppCompatActivity{
             resultado.setText("");
             resultado.setEnabled(false);
             resultado.setClickable(false);
+        }else{
+            salvaHistorico(base, moeda, valor, resposta);
         }
 
-        salvaHistorico(base, moeda, valor, resposta);
     }
 
     // Inicia Historico Activity
@@ -370,11 +314,11 @@ public class MainActivity extends AppCompatActivity{
         JSONObject jsonObject = new JSONObject();
 
         //Armazena dados em um Objeto JSON
-        jsonObject.put("DataHistorico",dataAtual);
-        jsonObject.put("MoedaBase",base);
-        jsonObject.put("ValorBase",valor);
-        jsonObject.put("MoedaDestino",moeda);
-        jsonObject.put("ValorDestino",resultado);
+        jsonObject.put("dataHistorico",dataAtual);
+        jsonObject.put("moedaBase",base);
+        jsonObject.put("valorBase",valor);
+        jsonObject.put("moedaDestino",moeda);
+        jsonObject.put("valorDestino",resultado);
         jsonArray.add(jsonObject);
 
         writeToFile(jsonArray.toJSONString(), jsonObject.toJSONString(), getApplicationContext());
@@ -382,6 +326,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void writeToFile(String data,String dataObj, Context context) {
+
         String historico = readFromFile(getApplicationContext());
         if(historico.isEmpty()){
             try {
@@ -392,9 +337,10 @@ public class MainActivity extends AppCompatActivity{
             catch (IOException e) {
                 Log.e("Exception", "File write failed: " + e.toString());
             }
+
         }else {
-            JSONArray jsonArray = new JSONArray();
-            JSONObject jsonObject = new JSONObject();
+            JSONArray jsonArray;
+            JSONObject jsonObject;
             JSONParser jsonParser = new JSONParser();
 
             try {
@@ -450,21 +396,15 @@ public class MainActivity extends AppCompatActivity{
 
     private void writeToAppFile(CoinRates data, Context context) {
 
-        JSONObject coinsObject = new JSONObject();
-        JSONObject coinRatesObject = new JSONObject();
-
-        if(data.getBase().equals("BRL")){
-            coinsObject.put("USD",data.getCoins().getUSD());
-            coinsObject.put("EUR",data.getCoins().getEUR());
-            coinsObject.put("BRL",data.getCoins().getBRL());
-            coinRatesObject.put("rates",coinsObject.toString());
-            coinRatesObject.put("base",data.getBase());
-            coinRatesObject.put("date",data.getDate());
-        }
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+        String jsonString = gson.toJson(data);
+        Log.v("testeTulio", jsonString);
 
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("appdata.txt", Context.MODE_PRIVATE));
-            outputStreamWriter.write(coinRatesObject.toJSONString());
+            outputStreamWriter.write(jsonString);
             outputStreamWriter.close();
         }
         catch (IOException e) {
@@ -472,7 +412,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    private String readFromAppFile(Context context) {
+    private void readFromAppFile(Context context) {
 
         String ret = "";
 
@@ -499,7 +439,11 @@ public class MainActivity extends AppCompatActivity{
             Log.e("login activity", "Can not read file: " + e.toString());
         }
 
-        return ret;
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        Gson gson = builder.create();
+        coinRates = gson.fromJson(ret, CoinRates.class);
+
     }
 
     boolean podeSair = false;
