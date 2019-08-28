@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context=".interface_grafica.HistoricoActivity">
+
+    <include
+        android:id="@+id/actionbar_padrao"
+        layout="@layout/layout_tollbar_actionbar"/>
+
+    <TextView
+        android:id="@+id/tv_titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/Margem32dp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:textSize="@dimen/dimen20sp"
+        android:text="@string/texto_historico_pontos"
+        android:layout_below="@id/actionbar_padrao"
+        />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/Margem16dp"
+        android:id="@+id/lv_historico"
+        android:layout_below="@id/tv_titulo">
+
+    </ListView>
+
+</RelativeLayout>

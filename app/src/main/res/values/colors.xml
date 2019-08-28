@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Cores tema android-->
+    <color name="colorPrimary">#00796B</color> // Cor da Barra de Título do App
+    <color name="colorPrimaryDark">#00695C</color> // Cor da Barra de Notificações
+    <color name="colorAccent">#009A78</color>
+
+    <!--Cores Gráficos-->
+
+    <color name="corLowColor">#84FFFF</color>
+    <color name="corMediumColor">#00E5FF</color>
+    <color name="corMaxColor">#00B8D4</color>
+
+    <!--Cores usadas-->
+    <color name="corVerdeGradiente1">#26A69A</color>
+    <color name="corVerdeGradiente2">#00695C</color>
+    <color name="corFundo">#E0F2F1</color> // Cor do background da telas
+    <color name="corBotaoHabilitado">#009a78</color>
+    <color name="corBotaoDesabilitado">#C0C0C0</color>
+    <color name="corTexto">@android:color/black</color>
+    <color name="corTextoBotao">@android:color/white</color>
+    <color name="corTextoTitulo">#0b406b</color>
+    <color name="corImagemBotao">@android:color/white</color>
+    <color name="corMenusEdialogos">#4CAF50</color>
+    <color name="corDestaque">#FFC107</color>
+
+</resources>
+

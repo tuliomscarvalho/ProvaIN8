@@ -1,0 +1,162 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center_horizontal">
+
+    <ImageView
+        android:id="@+id/ivViareal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/Margem12dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/logo_coin"
+        android:tint="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@+id/glHorizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.32" />
+
+    <LinearLayout
+        android:id="@+id/clLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="@dimen/Margem12dp"
+        android:orientation="vertical"
+        android:backgroundTint="@color/corFundo"
+        android:background="@drawable/ic_border_login"
+        app:layout_constraintBottom_toTopOf="@+id/llPerguntas"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/glHorizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/Margem16dp" >
+
+            <EditText
+                android:id="@+id/etUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_usuario"
+                android:background="@drawable/ic_border_edit_text"
+                android:minHeight="@dimen/Margem2dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
+                android:textSize="@dimen/textoComum" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/Margem16dp">
+
+            <EditText
+                android:id="@+id/etSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_senha"
+                android:background="@drawable/ic_border_edit_text"
+                android:inputType="textPassword"
+                android:minHeight="@dimen/Margem2dp"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/black"
+                android:textSize="@dimen/textoComum" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btEntrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:onClick="iniciaTelaMenu"
+            android:text="ENTRAR"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginRight="16dp"
+            android:textAllCaps="false"
+            android:textColor="@color/corTextoBotao"
+            app:backgroundTint="@color/colorAccent"
+            android:textSize="@dimen/textoComum" />
+
+        <CheckBox
+            android:id="@+id/cbPermanecerLogado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:layout_gravity="center"
+            android:minHeight="@dimen/Margem2dp"
+            android:scaleX=".74"
+            android:scaleY=".74"
+            android:text="@string/texto_permanecer_logado"
+            android:textColor="@color/corTextoTitulo"
+            android:textSize="@dimen/textoComum"
+            android:theme="@style/CheckboxStyle"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llPerguntas" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llPerguntas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clLogin">
+
+        <LinearLayout
+            android:id="@+id/llEsqueceuSenha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/Margem16dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clLogin">
+
+            <TextView
+                android:id="@+id/esqueceu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/Margem2dp"
+                android:layout_marginRight="@dimen/Margem2dp"
+                android:text="@string/texto_esqueceu_senha"
+                android:textColor="@color/corTextoTitulo"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/cliqueaqui"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:minHeight="@dimen/Margem2dp"
+                android:text="@string/texto_clique_aqui"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

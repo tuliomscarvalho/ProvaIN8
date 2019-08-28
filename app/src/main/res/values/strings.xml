@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">CoinConversion</string>
+
+    <string name="hint_usuario">Usuário</string>
+    <string name="hint_senha">Senha</string>
+    <string name="hint_valor">Valor</string>
+
+    <string name="texto_permanecer_logado">Permanecer logado</string>
+    <string name="texto_esqueceu_senha">Esqueceu sua senha? </string>
+    <string name="texto_clique_aqui">Clique aqui</string>
+    <string name="texto_converter">Converter</string>
+    <string name="texto_historico">Histórico</string>
+    <string name="texto_historico_pontos">Histórico:</string>
+    <string name="texto_data_pontos">Data:</string>
+    <string name="texto_resultado">Resultado:</string>
+    <string name="texto_valor">Valor:</string>
+    <string name="texto_converter_para">Converter para:</string>
+    <string name="texto_igual">=</string>
+    <string name="texto_eur">EUR</string>
+    <string name="texto_usd">USD</string>
+    <string name="texto_selecione_base">Selecione sua moeda base:</string>
+
+    <!--Toast exibido ao pressionar o botão 'back' do smartphone-->
+    <string name="texto_pressione_novamente">Pressione mais uma vez para sair!</string>
+
+</resources>

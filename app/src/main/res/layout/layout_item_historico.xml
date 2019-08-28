@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:layout_margin="@dimen/Margem16dp"
+    android:id="@+id/ll_item_historico"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/Margem2dp"
+        android:padding="@dimen/Margem4dp"
+        android:background="@drawable/ic_border_edit_text"
+        android:elevation="@dimen/Margem2dp"
+        android:orientation="horizontal"
+        android:baselineAligned="false"
+        tools:ignore="UnusedAttribute">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tamanhoGrande"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_titulo_data_historico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/texto_data_pontos"
+                android:textSize="@dimen/textoComum"
+                android:textColor="@color/corTextoTitulo"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/tv_data_historico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/textoComum"
+                android:textColor="@color/corTextoTitulo"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tamanhoGrande"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_moeda_base"
+                android:textColor="@android:color/black"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/tv_valor_base"
+                android:layout_weight="1"
+                android:textColor="@android:color/black"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="35dp"
+            android:layout_weight="0.5"
+            android:layout_gravity="center"
+            android:src="@drawable/arrow_right"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tamanhoGrande"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_moeda_destino"
+                android:textColor="@android:color/black"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/tv_valor_destino"
+                android:layout_weight="1"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
